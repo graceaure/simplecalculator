@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .calculator {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f9f9f9;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .operation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        .btn-operation {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-add { background-color: #10b981; }
+        .btn-add:hover { background-color: #059669; }
+        .btn-subtract { background-color: #f59e0b; }
+        .btn-subtract:hover { background-color: #d97706; }
+        .btn-multiply { background-color: #8b5cf6; }
+        .btn-multiply:hover { background-color: #7c3aed; }
+        .btn-divide { background-color: #ef4444; }
+        .btn-divide:hover { background-color: #dc2626; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="calculator bg-white rounded-lg shadow-lg p-8 w-full">
+        <h1 class="text-2xl font-bold text-center mb-6">My Simple Calculator</h1>
+        
+        <div class="mb-4">
+            <label for="firstNumber" class="block text-gray-700 font-medium mb-2">Enter first number:</label>
+            <input type="number" id="firstNumber" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 5">
+        </div>
+        
+        <div class="mb-4">
+            <label for="secondNumber" class="block text-gray-700 font-medium mb-2">Enter second number:</label>
+            <input type="number" id="secondNumber" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 3">
+        </div>
+        
+        <div class="operation-buttons mb-4">
+            <button class="btn-operation btn-add" id="addBtn">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button class="btn-operation btn-subtract" id="subtractBtn">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="btn-operation btn-multiply" id="multiplyBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="btn-operation btn-divide" id="divideBtn">
+                <i class="fas fa-divide"></i>
+            </button>
+        </div>
+        
+        <div class="result bg-gray-50 p-4 rounded-md">
+            <p class="text-gray-700 font-medium">Result:</p>
+            <p id="result" class="text-2xl font-bold text-gray-800">0</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstNumInput = document.getElementById('firstNumber');
+            const secondNumInput = document.getElementById('secondNumber');
+            const resultDisplay = document.getElementById('result');
+            
+            document.getElementById('addBtn').addEventListener('click', () => calculate('add'));
+            document.getElementById('subtractBtn').addEventListener('click', () => calculate('subtract'));
+            document.getElementById('multiplyBtn').addEventListener('click', () => calculate('multiply'));
+            document.getElementById('divideBtn').addEventListener('click', () => calculate('divide'));
+            
+            function calculate(operation) {
+                const firstNum = parseFloat(firstNumInput.value);
+                const secondNum = parseFloat(secondNumInput.value);
+                
+                if (isNaN(firstNum) || isNaN(secondNum)) {
+                    resultDisplay.textContent = 'Please enter valid numbers';
+                    return;
+                }
+                
+                let result;
+                switch (operation) {
+                    case 'add':
+                        result = firstNum + secondNum;
+                        break;
+                    case 'subtract':
+                        result = firstNum - secondNum;
+                        break;
+                    case 'multiply':
+                        result = firstNum * secondNum;
+                        break;
+                    case 'divide':
+                        if (secondNum === 0) {
+                            resultDisplay.textContent = 'Cannot divide by zero';
+                            return;
+                        }
+                        result = firstNum / secondNum;
+                        break;
+                }
+                resultDisplay.textContent = result;
+            }
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
